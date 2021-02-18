@@ -13,7 +13,7 @@ ui <- fluidPage(
     column(
       width = 4,
       sliderInput(
-        "data",
+        "data_",
         label = "Selecione o período",
         min = min(da_vacinacao_municipio$data, na.rm = TRUE),
         max = max(da_vacinacao_municipio$data, na.rm = TRUE),
@@ -29,8 +29,8 @@ ui <- fluidPage(
     ),
     column(
       width = 6,
-      reactable::reactableOutput("tabela"),
-      plotOutput("grafico")
+      reactable::reactableOutput("tabela")
+      # highcharter::highchartOutput("grafico")
     )
   )
 )
@@ -40,7 +40,7 @@ server <- function(input, output, session) {
   tabela_filtrada <- reactive({
     da_vacinacao_municipio %>%
       dplyr::filter(
-        data >= input$data
+        data >= as.Date(input$data_)
       )
   })
 
@@ -52,9 +52,9 @@ server <- function(input, output, session) {
     tabela(tabela_filtrada())
   })
 
-  output$grafico <- renderPlot({
-    barras(tabela_filtrada(), "n")
-  })
+  # output$grafico <- highcharter::renderHighchart({
+  #   # barras_hc(tabela_filtrada(), "n")
+  # })
 }
 
 shinyApp(ui, server)
