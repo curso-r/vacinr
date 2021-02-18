@@ -12,6 +12,12 @@ ui <- fluidPage(
   fluidRow(
     column(
       width = 4,
+      radioButtons("tipo_mapa", "Tipo de mapa",
+                   c("Círculo" = "circle",
+                     "Heatmap" = "heatmap")),
+      radioButtons("variavel", "Variável",
+                   c("N" = "n",
+                     "N > 80" = "n_80")),
       sliderInput(
         "data",
         label = "Selecione o período",
@@ -45,7 +51,11 @@ server <- function(input, output, session) {
   })
 
   output$mapa <- leaflet::renderLeaflet({
-    mapa(da_vacinacao_municipio, "n")
+    mapa(
+      da_vacinacao_municipio,
+      input$variavel,
+      input$tipo_mapa
+    )
   })
 
   output$tabela <- reactable::renderReactable({
@@ -53,7 +63,7 @@ server <- function(input, output, session) {
   })
 
   output$grafico <- renderPlot({
-    barras(tabela_filtrada(), "n")
+    barras(tabela_filtrada(), input$variavel)
   })
 }
 
