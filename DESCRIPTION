@@ -20,6 +20,7 @@ Imports:
     dplyr,
     reactable,
     ggplot2,
-    leaflet
+    leaflet,
+    leaflet.extras
 URL: https://github.com/curso-r/vacinr
 BugReports: https://github.com/curso-r/vacinr/issues
