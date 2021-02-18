@@ -35,8 +35,8 @@ ui <- fluidPage(
     ),
     column(
       width = 6,
-      reactable::reactableOutput("tabela")
-      # highcharter::highchartOutput("grafico")
+      reactable::reactableOutput("tabela"),
+      highcharter::highchartOutput("grafico")
     )
   )
 )
@@ -62,9 +62,9 @@ server <- function(input, output, session) {
     tabela(tabela_filtrada())
   })
 
-  # output$grafico <- highcharter::renderHighchart({
-  #   # barras_hc(tabela_filtrada(), "n")
-  # })
+  output$grafico <- highcharter::renderHighchart({
+    barras_hc(tabela_filtrada(), "n")
+  })
 }
 
 shinyApp(ui, server)

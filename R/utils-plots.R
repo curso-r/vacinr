@@ -8,19 +8,19 @@ barras <- function(da, var) {
     ggplot2::theme_minimal(12)
 }
 
-# barras_hc <- function(da, var) {
-#   da %>%
-#     dplyr::group_by(dia = data) %>%
-#     dplyr::summarise(total = sum(.data[[var]])) %>%
-#     highcharter::hchart(
-#       "column",
-#       highcharter::hcaes(x = dia, y = total)
-#     )
-#   # highcharter::highchart() %>%
-#   #   highcharter::hc_chart(type = "column") %>%
-#   #   highcharter::hc_title(text = "Gráfico de barras") %>%
-#   #   highcharter::hc_series(tab)
-# }
+barras_hc <- function(da, var) {
+  da %>%
+    dplyr::group_by(dia = data) %>%
+    dplyr::summarise(total = sum(.data[[var]])) %>%
+    highcharter::hchart(
+      "column",
+      highcharter::hcaes(x = dia, y = total)
+    )
+  # highcharter::highchart() %>%
+  #   highcharter::hc_chart(type = "column") %>%
+  #   highcharter::hc_title(text = "Gráfico de barras") %>%
+  #   highcharter::hc_series(tab)
+}
 
 tabela <- function(da) {
 
