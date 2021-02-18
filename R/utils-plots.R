@@ -35,7 +35,13 @@ tabela <- function(da) {
 
 }
 
-
+#' Monta mapinha
+#'
+#' @param da dados
+#' @param var variavel
+#' @param tipo "circle" ou "heatmap"
+#'
+#' @export
 mapa <- function(da, var, tipo = "circle") {
   m <- da %>%
     dplyr::group_by(muni_id, muni_nm) %>%
