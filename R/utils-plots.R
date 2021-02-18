@@ -42,7 +42,7 @@ tabela <- function(da) {
 #' @param tipo "circle" ou "heatmap"
 #'
 #' @export
-mapa <- function(da, var, tipo = "circle") {
+mapa <- function(da, var) {
   m <- da %>%
     dplyr::group_by(muni_id, muni_nm) %>%
     dplyr::summarise(
@@ -54,26 +54,14 @@ mapa <- function(da, var, tipo = "circle") {
       lab = paste0(muni_nm, ": ", n)
     ) %>%
     leaflet::leaflet() %>%
-    leaflet::addTiles()
-
-  if (tipo == "circle") {
-    m_final <- m %>%
-      leaflet::addCircles(
-        lat = ~lat,
-        lng = ~lon,
-        radius = ~n,
-        weight = 1,
-        color = "purple",
-        popup = ~lab
-      )
-  } else {
-    m_final <- m %>%
-      leaflet.extras::addHeatmap(
-        lat = ~lat,
-        lng = ~lon,
-        intensity = ~n,
-        radius = 10
-      )
-  }
-  m_final
+    leaflet::addTiles() %>%
+    leaflet::addCircles(
+      "mapa",
+      lat = ~lat,
+      lng = ~lon,
+      radius = ~n,
+      weight = 1,
+      color = "white",
+      popup = ~lab
+    )
 }

@@ -4,7 +4,7 @@
 \alias{mapa}
 \title{Monta mapinha}
 \usage{
-mapa(da, var, tipo = "circle")
+mapa(da, var)
 }
 \arguments{
 \item{da}{dados}
